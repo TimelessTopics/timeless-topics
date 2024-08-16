@@ -14,7 +14,7 @@ export function slugify(str: string) {
 export const fetchUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000/api"
-    : "https://daily-mini-blog.vercel.app/api";
+    : "https://daily-mini-blog-vercel.app/api";
 // : "http://localhost:3000/api";
 
 
