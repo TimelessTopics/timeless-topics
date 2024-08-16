@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { Icon } from '../Icon'
-import { fetcher, fetchUrl, ResponseData, slugify } from '@/lib/utils'
+import { fetchUrl, ResponseData, slugify } from '@/lib/utils'
 import { getTopPosts } from '@/lib/actions'
 const TopPosts = () => {
     const [data, setData] = useState<ResponseData | undefined>()
