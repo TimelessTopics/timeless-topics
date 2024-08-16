@@ -1,0 +1,24 @@
+import * as React from "react"
+import {
+    Card,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+import Link from "next/link"
+
+
+
+export function PostCard({ slug, summary, title, category }: { title: string, summary: string, slug: string, category: string }) {
+    return (
+        <Link href={`/blog/${category}/${slug}`} className="group ">
+            <Card className=" h-52 group-hover:scale-105 transition-all" >
+                <CardHeader className="h-full">
+                    <CardTitle>{title}</CardTitle>
+                    <CardDescription className=" h-full flex justify-center items-center">{summary}</CardDescription>
+                </CardHeader>
+
+            </Card>
+        </Link>
+    )
+}

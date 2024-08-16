@@ -1,0 +1,96 @@
+"use client"
+
+import * as React from "react"
+import Link from "next/link"
+
+import { cn } from "@/lib/utils"
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+import { CATEGORIES, siteConfig } from "@/lib/constants"
+import { Icon } from "@/components/Icon"
+import { ModeToggle } from "./ModeToggle"
+
+
+
+export function CustomNavigationMenu() {
+    return (
+        <div className="flex  items-center gap-y-5 justify-between flex-wrap py-10">
+            <Link href={'/'}>
+                <Icon.logo className="size-6" />
+            </Link>
+            <div className="flex-1 flex items-center">
+
+                <NavigationMenu className="">
+
+                    <NavigationMenuList className="">
+                        <NavigationMenuItem>
+                            <NavigationMenuTrigger>Posts</NavigationMenuTrigger>
+                            <NavigationMenuContent>
+                                <ul className="grid w-[250px] sm:w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                                    {CATEGORIES.map((category) => (
+                                        <ListItem
+                                            key={category.title}
+                                            title={category.title}
+                                            href={category.href}
+                                        >
+                                            {category.description}
+                                        </ListItem>
+                                    ))}
+                                </ul>
+                            </NavigationMenuContent>
+                        </NavigationMenuItem>
+                        <NavigationMenuItem>
+                            <Link href="/about" legacyBehavior passHref>
+                                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                    About
+                                </NavigationMenuLink>
+                            </Link>
+                        </NavigationMenuItem>
+                    </NavigationMenuList>
+
+                </NavigationMenu>
+                <div className="flex w-20 sm:w-32 items-center justify-between">
+                    <ModeToggle />
+                    <Link href={"/rss"}>
+                        <Icon.rss className="size-6" />
+                    </Link>
+                </div>
+            </div>
+        </div>
+
+    )
+}
+
+const ListItem = React.forwardRef<
+    React.ElementRef<"a">,
+    React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+    return (
+        <li>
+            <NavigationMenuLink asChild>
+                <a
+                    ref={ref}
+                    className={cn(
+                        "block select-none space-y-1 rounded-md sm:p-3 p-1 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                        className
+                    )}
+                    {...props}
+                >
+                    <div className="text-sm font-medium leading-none max-sm:text-xs">{title}</div>
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground max-sm:text-xs
+                    ">
+                        {children}
+                    </p>
+                </a>
+            </NavigationMenuLink>
+        </li>
+    )
+})
+ListItem.displayName = "ListItem"
