@@ -52,7 +52,35 @@ export const CATEGORIES = [
 ];
 
 
+type SiteConfigType = {
+    name: string;
+    description: string;
+    url: string;
+    ogImage: string;
+    links: {
+        github: string;
+    };
+    keywords: string[];
+}
+
+
+export const baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://daily-mini-blog.vercel.app"
 
 export const siteConfig = {
-    name: "desisoloboy"
+    name: "Daily Mini Blogs",
+    description: "An Open Source Blog platform using next js to keep you guys update throughout your daily life",
+    url: baseUrl,
+    ogImage: `${baseUrl}/og`,
+    links: {
+        github: "https://github.com/Samad-11/"
+    },
+    keywords: [
+        "blog",
+        "nextjs",
+        "typescript",
+        "react",
+        "javascript",
+        "open-source",
+        "daily-mini-blogs"
+    ]
 }

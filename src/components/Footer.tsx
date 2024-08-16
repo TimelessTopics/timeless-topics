@@ -38,8 +38,11 @@ const Footer = () => {
                             <Link href={'/about'} className='hover:underline '>
                                 About
                             </Link>
-                            <Link href={'/mailto:someone@example.com'} rel='external' className='hover:underline '>
+                            <Link href={'/mailto:samadmalik04@gmail.com'} rel='external' className='hover:underline '>
                                 Contact
+                            </Link>
+                            <Link href={'/terms-and-conditions'} rel='external' className='hover:underline '>
+                                Terms and Conditions
                             </Link>
 
                         </div>

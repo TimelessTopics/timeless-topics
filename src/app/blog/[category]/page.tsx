@@ -5,9 +5,35 @@ import { CustomNavigationMenu } from '@/components/NavigationMenu'
 import Container from '@/components/Container'
 import { notFound } from 'next/navigation'
 import { PostCard } from '@/components/PostCard'
-import { CATEGORIES } from '@/lib/constants'
+import { baseUrl, CATEGORIES, siteConfig } from '@/lib/constants'
 import BackButton from '@/components/BackButton'
+import { WithContext, Blog } from 'schema-dts'
 
+
+
+export function generateMetadata({ params }: { params: { category: string } }) {
+    const categoryObject = CATEGORIES.find((c) => c.href.includes(params.category))
+    if (!categoryObject) {
+        return
+    }
+
+    return {
+        title: categoryObject?.title,
+        description: categoryObject?.description,
+        canonical: `${siteConfig.url}/blog/${params.category}`,
+        openGraph: {
+            type: "website",
+            url: siteConfig.url,
+            title: categoryObject?.title,
+            description: categoryObject?.description,
+            images: [
+                {
+                    url: `${siteConfig.url}/og?title=${encodeURIComponent(categoryObject?.title)}`
+                }
+            ]
+        }
+    }
+}
 
 export async function generateStaticParams() {
     return CATEGORIES.map((category) => ({
@@ -16,6 +42,18 @@ export async function generateStaticParams() {
 }
 
 const page = ({ params }: { params: { category: string } }) => {
+    const jsonLd: WithContext<Blog> = {
+        '@context': 'https://schema.org',
+        '@type': 'Blog',
+        name: params.category,
+        url: `${baseUrl}/blog/${params.category}`,
+        description: `All Blogs about ${params.category}`,
+        author: {
+            '@type': 'Person',
+            name: "Abdus Samad"
+        },
+        image: `${baseUrl}/og?title=${params.category}`
+    }
     const filteredPosts = getBlogPosts()
         .filter((post) => slugify(post.metadata.category) === slugify(params.category))
     if (filteredPosts.length < 1) {
@@ -23,6 +61,10 @@ const page = ({ params }: { params: { category: string } }) => {
     }
     return (
         <div className='min-h-screen pb-10'>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
                     <CustomNavigationMenu />

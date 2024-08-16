@@ -8,12 +8,12 @@ function getMDXfiles(dir: string) {
 }
 
 //read data from the files
-function readMDXfiles(filepath: fs.PathOrFileDescriptor) {
+export function readMDXfiles(filepath: fs.PathOrFileDescriptor) {
     let rowContent = fs.readFileSync(filepath, "utf-8")
     return matter(rowContent)
 }
 
-//present the mdx data nad metadata
+//present the mdx data and metadata
 function getMDXdata(dir: string) {
     let mdxFiles = getMDXfiles(dir)
 

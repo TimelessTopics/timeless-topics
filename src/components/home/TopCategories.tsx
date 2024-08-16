@@ -11,7 +11,7 @@ const TopCategories = () => {
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2'>
                 {
                     CATEGORIES.slice(0, 6).map((category) => (
-                        <Button key={category.title} asChild variant={"outline"} className='text-sm hover:scale-110 transition-all'>
+                        <Button key={category.title} asChild variant={"outline"} className='text-sm hover:scale-110 transition-all hover:bg-transparent'>
                             <Link href={`${category.href}`} className='text-xs '>
                                 {category.title}
                             </Link>
