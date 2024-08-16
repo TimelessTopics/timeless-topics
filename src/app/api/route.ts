@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma"
+import { NextRequest, NextResponse } from "next/server";
 export async function GET() {
     try {
         const data = await prisma.blog.findMany({
@@ -9,14 +10,14 @@ export async function GET() {
             }]
         })
 
-        return Response.json(data)
+        return NextResponse.json(data)
     } catch (error) {
         console.log("Database Error...", error);
-        throw new Error("Failed to fetch popular posts")
+        return NextResponse.json({ message: "Operation failed" }, { status: 500 })
     }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     const { slug, title, category } = await req.json()
     try {
         const existingPost = await prisma.blog.findUnique({ where: { slug } })
@@ -36,9 +37,9 @@ export async function POST(req: Request) {
                 }
             })
         }
-        return new Response("Operation done successfully", { status: 200 })
+        return NextResponse.json({ message: "Operation done" }, { status: 200 })
     } catch (error) {
         console.log("Database Error...", error);
-        return new Response("Operation failed", { status: 500 })
+        return NextResponse.json({ message: "Operation failed" }, { status: 500 })
     }
 }
