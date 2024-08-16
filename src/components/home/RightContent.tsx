@@ -3,11 +3,11 @@ import TopCategories from './TopCategories'
 import TopPosts from './TopPosts'
 import { Blog } from '@prisma/client'
 
-const RightContent = ({ posts }: { posts: Blog[] }) => {
+const RightContent = () => {
     return (
         <div className='space-y-10 sm:min-h-screen '>
             <TopCategories />
-            <TopPosts posts={posts} />
+            <TopPosts />
         </div>
     )
 }

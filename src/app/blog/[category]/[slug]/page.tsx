@@ -5,7 +5,6 @@ import Container from '@/components/Container'
 import { CustomNavigationMenu } from '@/components/NavigationMenu'
 import { Breadcrumb } from '@/components/Breadcrumb'
 import ReportView from '@/components/ReportView'
-import { postView } from '@/actions'
 import BackButton from '@/components/BackButton'
 
 
@@ -17,15 +16,15 @@ export async function generateStaticParams() {
 }
 
 
-const page = async ({ params }: { params: { slug: string } }) => {
+const page = ({ params }: { params: { slug: string } }) => {
     let post = getBlogPosts().find((post) => params.slug === post.slug)
     if (!post) {
         return <h1>Post Not Found</h1>
     }
-    await postView(post.slug, post.metadata.category, post.metadata.title)
+    // await postView(post.slug, post.metadata.category, post.metadata.title)
     return (
         <div className='pb-10'>
-            {/* <ReportView category={post.metadata.category} slug={post.slug} title={post.metadata.title} /> */}
+            <ReportView category={post.metadata.category} slug={post.slug} title={post.metadata.title} />
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
 
