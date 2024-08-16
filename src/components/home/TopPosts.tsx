@@ -5,13 +5,8 @@ import { Icon } from '../Icon'
 import { topPosts } from '@/actions'
 import { Blog } from '@prisma/client'
 
-const TopPosts = () => {
-    const [posts, setPosts] = useState<Blog[] | undefined>()
-    useEffect(() => {
-        topPosts().then(data => setPosts(data))
-        console.log(posts);
-
-    }, [])
+const TopPosts = async ({ posts }: { posts: Blog[] }) => {
+    // const posts = await topPosts();
 
     return (
         <div className='space-y-6 sm:sticky sm:top-10'>

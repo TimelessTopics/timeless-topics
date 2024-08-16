@@ -6,6 +6,7 @@ import { CustomNavigationMenu } from '@/components/NavigationMenu'
 import { Breadcrumb } from '@/components/Breadcrumb'
 import ReportView from '@/components/ReportView'
 import { postView } from '@/actions'
+import BackButton from '@/components/BackButton'
 
 
 export async function generateStaticParams() {
@@ -33,6 +34,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
                         <Breadcrumb category={post.metadata.category} title={post.metadata.title} />
                         <h1 className='font-bold text-xl capitalize'>{post.metadata.title} posts</h1>
+                        <BackButton />
                         <p className='text-muted-foreground'>{post.metadata.publishedAt}</p>
                     </div>
                 </Container>
