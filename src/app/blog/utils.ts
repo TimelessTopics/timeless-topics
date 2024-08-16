@@ -46,9 +46,9 @@ export function formateDate(date: string, includeRelative = false) {
 
     let formattedDate = ""
 
-    if (yearAgo > 0) formattedDate = `${yearAgo}y ago`
-    else if (monthAgo > 0) formattedDate = `${monthAgo}m ago`
-    else if (dayAgo > 0) formattedDate = `${dayAgo}d ago`
+    if (yearAgo > 0) formattedDate = (yearAgo > 1) ? `${yearAgo}years ago` : `${yearAgo}year ago`
+    else if (monthAgo > 0) formattedDate = (monthAgo > 1) ? `${monthAgo}months ago` : `${monthAgo}month ago`
+    else if (dayAgo > 0) formattedDate = (dayAgo > 1) ? `${dayAgo}days ago` : `${dayAgo}day ago`
     else formattedDate = "Today"
 
     let fullDate = targetDate.toLocaleString("en-us", {

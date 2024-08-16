@@ -8,6 +8,7 @@ import ReportView from '@/components/ReportView'
 import BackButton from '@/components/BackButton'
 import { baseUrl, siteConfig } from '@/lib/constants'
 import { BlogPosting, WithContext } from 'schema-dts'
+import { updateView } from '@/lib/actions'
 
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
@@ -51,12 +52,7 @@ export async function generateStaticParams() {
 }
 
 
-const page = ({ params }: { params: { slug: string } }) => {
-
-
-
-
-
+const page = async ({ params }: { params: { slug: string } }) => {
     let post = getBlogPosts().find((post) => params.slug === post.slug)
     if (!post) {
         return <h1>Post Not Found</h1>
@@ -76,14 +72,14 @@ const page = ({ params }: { params: { slug: string } }) => {
         url: `${baseUrl}/blog/${post.metadata.category}/${post.slug}`
     }
 
-    // await postView(post.slug, post.metadata.category, post.metadata.title)
+    await updateView(post.slug, post.metadata.category, post.metadata.title)
     return (
         <div className='pb-10'>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <ReportView category={post.metadata.category} slug={post.slug} title={post.metadata.title} />
+            {/* <ReportView category={post.metadata.category} slug={post.slug} title={post.metadata.title} /> */}
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
 
@@ -91,7 +87,7 @@ const page = ({ params }: { params: { slug: string } }) => {
                     <div className='space-y-6'>
 
                         <Breadcrumb category={post.metadata.category} title={post.metadata.title} />
-                        <h1 className='font-bold text-xl capitalize'>{post.metadata.title} posts</h1>
+                        <h1 className='font-bold text-xl capitalize'>{post.metadata.title}</h1>
                         <BackButton />
                         <p className='text-muted-foreground'>{post.metadata.publishedAt}</p>
                     </div>
