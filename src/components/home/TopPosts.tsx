@@ -8,13 +8,16 @@ import { fetcher, fetchUrl } from '@/lib/utils'
 const TopPosts = () => {
 
     const { data, error, isLoading } = useSWR(fetchUrl, fetcher)
+    if (error) return <div>Error :</div>
+    if (isLoading) return <div>Loading...</div>
 
     return (
         <div className='space-y-6 sm:sticky sm:top-10'>
             <h2 className='font-semibold'>Popular Posts</h2>
             <div className='space-y-3'>
                 {
-                    data?.map((post) => (
+                    data &&
+                    data.map((post) => (
                         <Link key={post.slug} href={`/blog/${post.category}/${post.slug}`}
                             className='flex gap-3 items-center group w-fit'
                         >
