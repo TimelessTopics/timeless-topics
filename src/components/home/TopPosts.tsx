@@ -9,6 +9,8 @@ const TopPosts = () => {
     const [posts, setPosts] = useState<Blog[] | undefined>()
     useEffect(() => {
         topPosts().then(data => setPosts(data))
+        console.log(posts);
+
     }, [])
 
     return (

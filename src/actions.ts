@@ -6,14 +6,16 @@ export async function postView(slug: string, category: string, title: string) {
     try {
         const isExistingPost = await prisma.blog.findUnique({ where: { slug } })
         if (isExistingPost) {
-            await prisma.blog.update({
+            const updatedPost = await prisma.blog.update({
                 where: { slug },
                 data: {
                     view_count: { increment: 1 }
                 }
             })
+            console.log(updatedPost);
+
         } else {
-            await prisma.blog.create({
+            const newPost = await prisma.blog.create({
                 data: {
                     slug,
                     category,
@@ -21,6 +23,7 @@ export async function postView(slug: string, category: string, title: string) {
                     view_count: 1
                 }
             })
+            console.log(newPost);
         }
     } catch (error) {
         console.log("Something went wrong", error);

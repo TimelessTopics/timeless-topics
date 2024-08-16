@@ -1,8 +1,12 @@
+'use client'
 import { postView } from '@/actions'
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const ReportView = async ({ category, slug, title }: { slug: string, category: string, title: string }) => {
-    await postView(slug, category, title)
+const ReportView = ({ category, slug, title }: { slug: string, category: string, title: string }) => {
+    useEffect(() => {
+        postView(slug, category, title)
+    }, [])
+
     return (
         <></>
     )
