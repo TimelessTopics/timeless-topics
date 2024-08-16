@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 const LatestPost = () => {
-    let latestPosts = getBlogPosts()
+    let latestPosts = getBlogPosts().slice(0, 8)
     return (
         <div className='space-y-10'>
             <h1 className='text-3xl tracking-tight'>Recently Published</h1>
@@ -23,6 +23,12 @@ const LatestPost = () => {
                             </article>
                         ))
                 }
+            </div>
+            <div>
+
+                <Link href={'/blog'} className='hover:underline transition-all hover:text-blue-400'>
+                    Show More
+                </Link>
             </div>
         </div>
     )

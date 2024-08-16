@@ -4,7 +4,7 @@ import TopPosts from './TopPosts'
 
 const RightContent = () => {
     return (
-        <div className='space-y-10'>
+        <div className='space-y-10 sm:min-h-screen '>
             <TopCategories />
             <TopPosts />
         </div>

@@ -2,19 +2,21 @@ import { getBlogPosts } from '@/app/blog/utils'
 import Link from 'next/link'
 import React from 'react'
 import { Icon } from '../Icon'
+import { topPosts } from '@/actions'
 
-const TopPosts = () => {
+const TopPosts = async () => {
+    const posts = await topPosts() || []
     return (
-        <div className='space-y-6'>
+        <div className='space-y-6 sm:sticky sm:top-10'>
             <h2 className='font-semibold'>Popular Posts</h2>
             <div className='space-y-3'>
                 {
-                    getBlogPosts().slice(0, 3).map((post) => (
-                        <Link key={post.slug} href={`/blog/${post.metadata.category}/${post.slug}`}
-                            className='flex gap-3 items-center group'
+                    posts.map((post) => (
+                        <Link key={post.slug} href={`/blog/${post.category}/${post.slug}`}
+                            className='flex gap-3 items-center group w-fit'
                         >
                             <Icon.arrowRight className='size-5 group-hover:translate-x-2 transition-all' />
-                            <span>{post.metadata.title}</span>
+                            <span>{post.title}</span>
                         </Link>
                     ))
                 }

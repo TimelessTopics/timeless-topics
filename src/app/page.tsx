@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <Container>
         <CustomNavigationMenu />
-        <main className="grid sm:grid-cols-2 gap-5 ">
+        <main className="grid sm:grid-cols-2 gap-5 pb-10">
           <LatestPost />
           <RightContent />
         </main>

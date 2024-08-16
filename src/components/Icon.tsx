@@ -1,4 +1,4 @@
-import { ArrowRight, Command, Icon as LucideIcon, Rss, Twitter, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Command, Icon as LucideIcon, Rss, Twitter, X } from "lucide-react";
 
 
 
@@ -8,6 +8,7 @@ export const Icon = {
     logo: Command,
     rss: Rss,
     arrowRight: ArrowRight,
+    arrowLeft: ArrowLeft,
     x: X,
 
 
