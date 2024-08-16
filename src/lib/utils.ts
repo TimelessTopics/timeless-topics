@@ -19,12 +19,12 @@ export const fetchUrl =
 
 // export const fetchUrl = "https://daily-mini-blog.vercel.app/api"
 
-type ResponseData = {
+export type ResponseData = {
   category: string;
   title: string;
   slug: string;
 }[];
 
-export const fetcher = (
-  ...args: Parameters<typeof fetch>
-): Promise<ResponseData> => fetch(...args).then((res) => res.json());
+// export const fetcher = (
+//   ...args: Parameters<typeof fetch>
+// ): Promise<ResponseData> => fetch(...args).then((res) => res.json());

@@ -2,14 +2,24 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { Icon } from '../Icon'
-import { Blog } from '@prisma/client'
-import useSWR from 'swr'
-import { fetcher, fetchUrl } from '@/lib/utils'
+import { fetcher, fetchUrl, ResponseData, slugify } from '@/lib/utils'
+import { getTopPosts } from '@/lib/actions'
 const TopPosts = () => {
+    const [data, setData] = useState<ResponseData | undefined>()
+    // const { data, error, isLoading } = useSWR(fetchUrl, fetcher, { refreshInterval: 100})
+    // if (error) return <div>Error :</div>
+    // if (isLoading) return <div>Loading...</div>
 
-    const { data, error, isLoading } = useSWR(fetchUrl, fetcher)
-    if (error) return <div>Error :</div>
-    if (isLoading) return <div>Loading...</div>
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await getTopPosts()
+            console.log(response);
+            setData(response)
+        }
+        fetchData()
+    }, [])
+
+
 
     return (
         <div className='space-y-6 sm:sticky sm:top-10'>
@@ -18,7 +28,7 @@ const TopPosts = () => {
                 {
                     data &&
                     data.map((post) => (
-                        <Link key={post.slug} href={`/blog/${post.category}/${post.slug}`}
+                        <Link key={post.slug} href={`/blog/${slugify(post.category)}/${post.slug}`}
                             className='flex gap-3 items-center group w-fit'
                         >
                             <Icon.arrowRight className='size-5 group-hover:translate-x-2 transition-all' />

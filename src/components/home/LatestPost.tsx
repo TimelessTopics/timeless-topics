@@ -1,4 +1,5 @@
 import { formateDate, getBlogPosts } from '@/app/blog/utils'
+import { slugify } from '@/lib/utils'
 import Link from 'next/link'
 import React from 'react'
 
@@ -17,7 +18,7 @@ const LatestPost = () => {
                     })
                         .map((post) => (
                             <article key={post.slug} className='space-y-6 transition-all'>
-                                <Link className='font-bold hover:text-blue-500' href={`/blog/${post.metadata.category}/${post.slug}`}>{post.metadata.title}</Link>
+                                <Link className='font-bold hover:text-blue-500' href={`/blog/${slugify(post.metadata.category)}/${post.slug}`}>{post.metadata.title}</Link>
                                 <p className=''>{post.metadata.summary}</p>
                                 <p className='text-muted-foreground'>{formateDate(post.metadata.publishedAt, true)}</p>
                             </article>

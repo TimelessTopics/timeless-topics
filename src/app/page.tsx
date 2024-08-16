@@ -6,7 +6,6 @@ import { baseUrl, siteConfig } from "@/lib/constants";
 import { WebSite, WithContext } from "schema-dts"
 
 
-
 export default function Home() {
   const jsonLd: WithContext<WebSite> = {
     "@context": "https://schema.org",
