@@ -64,11 +64,11 @@ type SiteConfigType = {
 }
 
 
-export const baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://daily-mini-blog.vercel.app"
+export const baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://timelesstopics.vercel.app"
 
 export const siteConfig = {
-    name: "Daily Mini Blogs",
-    description: "An Open Source Blog platform using next js to keep you guys update throughout your daily life",
+    name: "Timeless Topics",
+    description: "Explore a diverse range of insightful and evergreen content on Timeless Topics. From in-depth articles and expert analysis to thought-provoking discussions, our blog provides valuable information on a variety of subjects that remain relevant over time. Stay informed and engaged with high-quality posts that cover everything from technology and culture to personal development and beyond.",
     url: baseUrl,
     ogImage: `${baseUrl}/og`,
     links: {
@@ -79,6 +79,7 @@ export const siteConfig = {
         "nextjs",
         "typescript",
         "react",
+        "latest",
         "javascript",
         "open-source",
         "daily-mini-blogs"
