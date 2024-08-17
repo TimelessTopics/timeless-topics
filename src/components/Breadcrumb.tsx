@@ -9,19 +9,20 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { slugify } from "@/lib/utils"
+import Link from "next/link"
 
 export function Breadcrumb({ category, title }: { category: string, title: string }) {
     return (
         <BreadCrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href="/" title={"Home"}>Home</BreadcrumbLink>
+                    <Link href="/" title={"Home"}>Home</Link>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                     <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                    <BreadcrumbLink title={category} className="capitalize" href={`/blog/${slugify(category)}`}>{category}</BreadcrumbLink>
+                    <Link title={category} className="capitalize" href={`/blog/${slugify(category)}`}>{category}</Link>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                     <Slash />
