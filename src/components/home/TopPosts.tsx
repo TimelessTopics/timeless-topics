@@ -13,7 +13,7 @@ const TopPosts = () => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await getTopPosts()
-            console.log(response);
+            // console.log(response);
             setData(response)
         }
         fetchData()
@@ -31,8 +31,10 @@ const TopPosts = () => {
                         <Link key={post.slug} href={`/blog/${slugify(post.category)}/${post.slug}`}
                             className='flex gap-3 items-center group w-fit'
                         >
-                            <Icon.arrowRight className='size-5 group-hover:translate-x-2 transition-all' />
-                            <span>{post.title}</span>
+                            <div>
+                                <Icon.arrowRight className='size-5  group-hover:translate-x-2 transition-all' />
+                            </div>
+                            <span className='break-words'>{post.title}</span>
                         </Link>
                     ))
                 }
