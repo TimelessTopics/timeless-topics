@@ -1,6 +1,5 @@
 import { siteConfig } from '@/lib/constants'
 import React from 'react'
-import { Icon } from './Icon'
 
 const OgElement = ({ title }: { title: string }) => {
     return (
@@ -28,7 +27,7 @@ const OgElement = ({ title }: { title: string }) => {
                 >
                     <span
                         style={{
-                            width: 40,
+                            width: 60,
                             height: 40,
                             background: "black",
                             color: "white",
@@ -38,7 +37,7 @@ const OgElement = ({ title }: { title: string }) => {
                             alignItems: "center"
                         }}
                     >
-                        <Icon.logo className='size-5' />
+                        {"<tT />"}
                     </span>
                     <span
                         style={{
