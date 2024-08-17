@@ -21,9 +21,12 @@ import { ModeToggle } from "./ModeToggle"
 
 export function CustomNavigationMenu() {
     return (
-        <div className="flex  items-center gap-y-5 justify-between flex-wrap py-10">
-            <Link href={'/'} title={siteConfig.name}>
-                <Icon.logo className="size-6" />
+        <div className="flex  items-center gap-y-5  justify-between flex-wrap py-10">
+            <Link href={'/'} title={siteConfig.name} className="group flex items-center justify-center gap-2">
+                <Icon.logo className="size-6 group-hover:animate-spin
+                group-focus:animate-spin
+                transition-all" />
+                <span className="font-mono">{siteConfig.name}</span>
             </Link>
             <div className="flex-1 flex items-center">
 
@@ -47,7 +50,7 @@ export function CustomNavigationMenu() {
                             </NavigationMenuContent>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                            <Link href="/about" title="About" >
+                            <Link href="/about" legacyBehavior passHref title="About" >
                                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                     About
                                 </NavigationMenuLink>
@@ -56,7 +59,7 @@ export function CustomNavigationMenu() {
                     </NavigationMenuList>
 
                 </NavigationMenu>
-                <div className="flex w-20 sm:w-32 items-center justify-between">
+                <div className="flex sm:w-20 items-center justify-between">
                     <ModeToggle />
                     <Link href={"/rss"}>
                         <Icon.rss className="size-6" />

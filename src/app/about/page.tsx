@@ -6,8 +6,14 @@ import React from 'react'
 import { readMDXfiles } from '../blog/utils'
 import path from 'path'
 import { AboutPage, WithContext } from 'schema-dts'
-import { baseUrl } from '@/lib/constants'
+import { baseUrl, siteConfig } from '@/lib/constants'
+import { Metadata } from 'next'
 
+
+export const metadata: Metadata = {
+    title: "About Us",
+    description: `This is the About Page of the site ${siteConfig.name}, You will get to know about our vision here.`
+}
 
 
 const page = () => {
@@ -22,7 +28,7 @@ const page = () => {
             '@type': 'Person',
             name: 'Abdus Samad',
         },
-        description: 'This is the About Page page.',
+        description: 'This is the About Page .',
         image: {
             '@type': 'ImageObject',
             url: `${baseUrl}/og`,

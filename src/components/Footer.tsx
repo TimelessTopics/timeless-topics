@@ -49,6 +49,17 @@ const Footer = () => {
                             </Link>
 
                         </div>
+                        <div className='flex items-center justify-start gap-3'>
+                            <Link href={siteConfig.links.instagram} >
+                                <Icon.instagram className='size-5' />
+                            </Link>
+                            <Link href={siteConfig.links.github}>
+                                <Icon.github className='size-5' />
+                            </Link>
+                            <Link href={siteConfig.links.linkedin} title='LinkedIn'>
+                                <Icon.linkedin className='size-5' />
+                            </Link>
+                        </div>
                     </div>
                 </footer>
                 <div className='pt-5 flex sm:flex-row flex-col justify-center gap-5 items-center'>

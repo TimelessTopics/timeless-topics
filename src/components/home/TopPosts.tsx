@@ -4,30 +4,32 @@ import React, { useEffect, useState } from 'react'
 import { Icon } from '../Icon'
 import { fetchUrl, ResponseData, slugify } from '@/lib/utils'
 import { getTopPosts } from '@/lib/actions'
+import TopPostSkeleton from '../TopPostSkeleton'
 const TopPosts = () => {
     const [data, setData] = useState<ResponseData | undefined>()
     // const { data, error, isLoading } = useSWR(fetchUrl, fetcher, { refreshInterval: 100})
     // if (error) return <div>Error :</div>
     // if (isLoading) return <div>Loading...</div>
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true)
             const response = await getTopPosts()
             // console.log(response);
             setData(response)
+            setIsLoading(false)
         }
         fetchData()
     }, [])
-
-
-
+    if (isLoading) return <TopPostSkeleton />
     return (
         <div className='space-y-6 sm:sticky sm:top-10'>
             <h2 className='font-semibold'>Popular Posts</h2>
             <div className='space-y-3'>
                 {
                     data &&
-                    data.map((post) => (
+                    data?.map((post) => (
                         <Link title={post.title} key={post.slug} href={`/blog/${slugify(post.category)}/${post.slug}`}
                             className='flex gap-3 items-center group w-fit'
                         >

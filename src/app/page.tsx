@@ -5,6 +5,7 @@ import { CustomNavigationMenu } from "@/components/NavigationMenu";
 import { baseUrl, siteConfig } from "@/lib/constants";
 import { WebSite, WithContext } from "schema-dts"
 import loading from "./loading";
+import HomeAbout from "@/components/home/HomeAbout";
 
 
 export default function Home() {
@@ -35,6 +36,7 @@ export default function Home() {
           <LatestPost />
           <RightContent />
         </main>
+        <HomeAbout />
       </Container>
     </>
   );

@@ -72,7 +72,9 @@ export const siteConfig = {
     url: baseUrl,
     ogImage: `${baseUrl}/og`,
     links: {
-        github: "https://github.com/Samad-11/"
+        github: "https://github.com/Samad-11/",
+        instagram: "https://www.instagram.com/baddek__eih/",
+        linkedin: "https://www.linkedin.com/in/abdus-samad-633b3425a"
     },
     keywords: [
         "blog",

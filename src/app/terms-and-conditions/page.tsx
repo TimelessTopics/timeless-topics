@@ -6,8 +6,13 @@ import React from 'react'
 import { readMDXfiles } from '../blog/utils'
 import path from 'path'
 import { WithContext, WebPage } from 'schema-dts'
-import { baseUrl } from '@/lib/constants'
+import { baseUrl, siteConfig } from '@/lib/constants'
+import { Metadata } from 'next'
 
+export const metadata: Metadata = {
+    title: "Terms and Conditions",
+    description: `This is the Terms and Conditions page of the site ${siteConfig.name}, You will get to know about our privacy policies and conditions here.`
+}
 
 
 const page = () => {
