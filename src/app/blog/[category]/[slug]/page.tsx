@@ -9,6 +9,7 @@ import BackButton from '@/components/BackButton'
 import { baseUrl, siteConfig } from '@/lib/constants'
 import { BlogPosting, WithContext } from 'schema-dts'
 import { updateView } from '@/lib/actions'
+import { slugify } from '@/lib/utils'
 
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
@@ -17,17 +18,18 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
         return
     }
     let ogImage = `${siteConfig.url}/og?title=${encodeURIComponent(post?.metadata.title)}`
-
+    let keywords = post?.metadata.keywords.split(",") || []
     return {
         title: post?.metadata.title,
+        keywords,
         description: post?.metadata.summary,
-        canonical: `${siteConfig.url}/blog/${post?.metadata.category}/${post?.slug}`,
+        canonical: `${siteConfig.url}/blog/${slugify(post?.metadata.category)}/${post?.slug}`,
         openGraph: {
             title: post.metadata.title,
             description: post.metadata.summary,
             type: "article",
             publishedTime: post.metadata.publishedAt,
-            url: `${siteConfig.url}/blog/${post.metadata.category}/${post.slug}`,
+            url: `${siteConfig.url}/blog/${slugify(post.metadata.category)}/${post.slug}`,
             images: [
                 {
                     url: ogImage
@@ -69,7 +71,7 @@ const page = ({ params }: { params: { slug: string } }) => {
             name: "Abdus Samad"
         },
         description: post.metadata.summary,
-        url: `${baseUrl}/blog/${post.metadata.category}/${post.slug}`
+        url: `${baseUrl}/blog/${slugify(post.metadata.category)}/${post.slug}`
     }
 
     // await updateView(post.slug, post.metadata.category, post.metadata.title)

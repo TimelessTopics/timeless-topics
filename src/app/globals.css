@@ -194,11 +194,20 @@ input[type="email"] {
   appearance: none;
 }
 
-table {
+.prose table {
   display: block;
   max-width: fit-content;
   overflow-x: auto;
   white-space: nowrap;
+  @apply my-7
+}
+
+.prose thead {
+  @apply font-semibold
+}
+
+.prose table, td, th {
+  @apply p-4 border border-collapse
 }
 
 .title {
