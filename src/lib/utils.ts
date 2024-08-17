@@ -31,3 +31,8 @@ export type ResponseData = {
   title: string;
   slug: string;
 }[];
+
+
+export const minimizeString = (str: string, max = 20) => {
+  return (str.length > max ? str.substring(0, max - 3) + '...' : str).trim();
+}

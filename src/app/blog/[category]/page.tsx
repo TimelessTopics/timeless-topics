@@ -56,7 +56,12 @@ const page = ({ params }: { params: { category: string } }) => {
     }
     const filteredPosts = getBlogPosts()
         .filter((post) => slugify(post.metadata.category) === slugify(params.category))
-    if (filteredPosts.length < 1) {
+    // if (filteredPosts.length < 1) {
+    //     return notFound()
+    // }
+
+    const category = CATEGORIES.find((c) => slugify(c.title) === params.category)
+    if (!category) {
         return notFound()
     }
     return (
@@ -68,7 +73,7 @@ const page = ({ params }: { params: { category: string } }) => {
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
                     <CustomNavigationMenu />
-                    <h1 className='font-bold text-xl capitalize mb-2'>{filteredPosts[0].metadata.category} posts</h1>
+                    <h1 className='font-bold text-xl capitalize mb-2'>{filteredPosts?.[0]?.metadata?.category || category.title}</h1>
                     <BackButton />
 
                 </Container>
@@ -80,6 +85,11 @@ const page = ({ params }: { params: { category: string } }) => {
                             <PostCard category={post.metadata.category} slug={post.slug} summary={post.metadata.summary} title={post.metadata.title} />
                         </article>
                     ))
+                    }
+                    {
+                        filteredPosts.length === 0 && (
+                            <div className='text-center'>No posts found for this category.</div>
+                        )
                     }
                 </div>
             </Container>

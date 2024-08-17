@@ -9,14 +9,13 @@ const Footer = () => {
         <div className='bg-gray-100 dark:bg-gray-800 py-10'>
             <Container>
                 <footer className='grid grid-cols-1 gap-y-10 sm:grid-cols-3 gap-x-5'>
-                    <div className='flex justify-between flex-col gap-y-4'>
-                        <Link href={'/'}>
-                            <Icon.logo className='size-10' />
-                            <span className='font-bold capitalize '>{siteConfig.name}</span>
+                    <div className='flex justify-between flex-col gap-y-4 '>
+                        <Link href={'/'} className='  relative w-32 h-16 group'>
+                            <Icon.logo className='size-10  transition-all  absolute group-hover:translate-x-[200%] ' />
+                            <span className='font-bold capitalize absolute bottom-0'>{siteConfig.name}</span>
                         </Link>
-                        <p>
-                            The {siteConfig.name} is dedicated to sharing knowledge and inspiring continuous learning.
-                            Join us in exploring new ideas and growing together.
+                        <p className='text-pretty'>
+                            The {siteConfig.name} is dedicated to sharing valuable knowledge and inspiring a culture of continuous learning. Our mission is to explore new ideas, provide insightful content, and foster personal and professional growth. Join us as we delve into diverse topics and learn together, one blog at a time.
                         </p>
                     </div>
                     <div className='space-y-6'>
@@ -26,7 +25,7 @@ const Footer = () => {
                         <div className='flex flex-col text-sm text-muted-foreground gap-y-2'>
                             {
                                 CATEGORIES.map((category) => (
-                                    <Link key={category.href} href={category.href} className='hover:underline '>
+                                    <Link key={category.href} href={category.href} className='hover:underline w-fit'>
                                         {category.title}
                                     </Link>
                                 ))
@@ -39,24 +38,28 @@ const Footer = () => {
                         </h5>
                         <div className='flex flex-col text-sm text-muted-foreground gap-y-2'>
 
-                            <Link href={'/about'} className='hover:underline '>
+                            <Link href={'/about'} className='hover:underline w-fit'>
                                 About
                             </Link>
-                            <Link href={'/mailto:samadmalik04@gmail.com'} rel='external' className='hover:underline '>
+                            <Link href={'/mailto:samadmalik04@gmail.com'} rel='external' className='hover:underline w-fit'>
                                 Contact
                             </Link>
-                            <Link href={'/terms-and-conditions'} rel='external' className='hover:underline '>
+                            <Link href={'/terms-and-conditions'} rel='external' className='hover:underline w-fit'>
                                 Terms and Conditions
                             </Link>
 
                         </div>
                     </div>
                 </footer>
-                <div className='pt-5 flex justify-center gap-5 items-center'>
-                    <p className='text-sm text-gray-500 flex-wrap'>
-                        &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-                    </p>
-                    <Link href={"/sitemap.xml"} className='text-muted-foreground hover:text-primary transition-all'>Sitemap</Link>
+                <div className='pt-5 flex sm:flex-row flex-col justify-center gap-5 items-center'>
+                    <div>
+                        <p className='text-sm text-gray-500 flex-wrap'>
+                            &copy; {new Date().getFullYear()} <Link href={"/"}>{siteConfig.name}</Link>. All rights reserved.
+                        </p>
+                    </div>
+                    <div>
+                        <Link href={"/sitemap.xml"} className='text-muted-foreground hover:text-primary transition-all'>Sitemap</Link>
+                    </div>
                 </div>
             </Container>
         </div>

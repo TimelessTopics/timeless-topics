@@ -25,10 +25,9 @@ const LatestPost = () => {
                         ))
                 }
             </div>
-            <div>
-
-                <Link href={'/blog'} className='hover:underline transition-all hover:text-blue-400'>
-                    Show More
+            <div className='pb-10'>
+                <Link href={'/blog'} className='hover:underline underline underline-offset-4 transition-all hover:text-blue-400'>
+                    Show All Posts
                 </Link>
             </div>
         </div>
