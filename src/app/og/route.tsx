@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og"
 export async function GET(req: Request) {
     const url = new URL(req.url)
 
-    let title = url.searchParams.get("title") || "Daily Mini Blog"
+    let title = url.searchParams.get("title") || "Timeless Topics"
     try {
         return new ImageResponse(<OgElement title={title} />, {
             width: 1200,
