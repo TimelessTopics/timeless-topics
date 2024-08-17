@@ -82,7 +82,7 @@ let components = {
     a: CustomLink,
     code: Code,
     blockquote: Blockquote,
-    Table
+    Table,
 
 
 }

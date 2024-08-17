@@ -11,6 +11,7 @@ import { WebPage, WithContext } from 'schema-dts'
 import { baseUrl } from '@/lib/constants'
 
 
+
 const metadata: Metadata = {
     title: "All Blogs",
     description: "All the blogs posts are here you can choose as your desire"

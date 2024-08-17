@@ -7,7 +7,14 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export function slugify(str: string) {
-  return str.toString().toLowerCase().trim().replace(/\s+/g, "-").replace(/&/g, "-and-").replace(/\-\-+/g, "-")
+  return str.toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/&/g, "-and-")
+    .replace(/\-\-+/g, "-")
+    .replace(/\s*:\s*/g, "-")
+    .replace(/\./g, "");
 }
 
 
@@ -24,7 +31,3 @@ export type ResponseData = {
   title: string;
   slug: string;
 }[];
-
-// export const fetcher = (
-//   ...args: Parameters<typeof fetch>
-// ): Promise<ResponseData> => fetch(...args).then((res) => res.json());

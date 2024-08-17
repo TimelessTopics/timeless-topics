@@ -4,6 +4,7 @@ import RightContent from "@/components/home/RightContent";
 import { CustomNavigationMenu } from "@/components/NavigationMenu";
 import { baseUrl, siteConfig } from "@/lib/constants";
 import { WebSite, WithContext } from "schema-dts"
+import loading from "./loading";
 
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       url: siteConfig.links.github,
     }
   }
+
   return (
     <>
       <script

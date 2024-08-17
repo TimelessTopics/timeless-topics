@@ -42,7 +42,7 @@ const page = () => {
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
                     <CustomNavigationMenu />
-                    <h1 className='font-bold text-xl capitalize mb-2'>Terms And Conditions</h1>
+                    <h1 className='font-bold text-xl capitalize mb-2'>About</h1>
                     <BackButton />
                 </Container>
             </div>
