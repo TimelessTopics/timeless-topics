@@ -28,7 +28,7 @@ const TopPosts = () => {
                 {
                     data &&
                     data.map((post) => (
-                        <Link key={post.slug} href={`/blog/${slugify(post.category)}/${post.slug}`}
+                        <Link title={post.title} key={post.slug} href={`/blog/${slugify(post.category)}/${post.slug}`}
                             className='flex gap-3 items-center group w-fit'
                         >
                             <div>

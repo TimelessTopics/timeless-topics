@@ -22,7 +22,7 @@ import { ModeToggle } from "./ModeToggle"
 export function CustomNavigationMenu() {
     return (
         <div className="flex  items-center gap-y-5 justify-between flex-wrap py-10">
-            <Link href={'/'}>
+            <Link href={'/'} title={siteConfig.name}>
                 <Icon.logo className="size-6" />
             </Link>
             <div className="flex-1 flex items-center">
@@ -47,7 +47,7 @@ export function CustomNavigationMenu() {
                             </NavigationMenuContent>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                            <Link href="/about" legacyBehavior passHref>
+                            <Link href="/about" title="About" >
                                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                     About
                                 </NavigationMenuLink>
@@ -78,6 +78,7 @@ const ListItem = React.forwardRef<
                 <Link
                     href={href || ""}
                     ref={ref}
+                    title={title}
                     className={cn(
                         "block select-none space-y-1 rounded-md sm:p-3 p-1 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
                         className

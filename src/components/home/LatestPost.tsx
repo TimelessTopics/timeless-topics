@@ -18,7 +18,7 @@ const LatestPost = () => {
                     })
                         .map((post) => (
                             <article key={post.slug} className='space-y-6 transition-all'>
-                                <Link className='font-bold hover:text-blue-500' href={`/blog/${slugify(post.metadata.category)}/${post.slug}`}>{post.metadata.title}</Link>
+                                <Link title={post.metadata.title || "Latest Post"} className='font-bold hover:text-blue-500' href={`/blog/${slugify(post.metadata.category)}/${post.slug}`}>{post.metadata.title}</Link>
                                 <p className=''>{post.metadata.summary}</p>
                                 <p className='text-muted-foreground'>{formateDate(post.metadata.publishedAt, true)}</p>
                             </article>
@@ -26,7 +26,7 @@ const LatestPost = () => {
                 }
             </div>
             <div className='pb-10'>
-                <Link href={'/blog'} className='hover:underline underline underline-offset-4 transition-all hover:text-blue-400'>
+                <Link title={"Show All Posts"} href={'/blog'} className='hover:underline underline underline-offset-4 transition-all hover:text-blue-400'>
                     Show All Posts
                 </Link>
             </div>

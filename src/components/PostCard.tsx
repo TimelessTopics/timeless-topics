@@ -12,7 +12,7 @@ import { minimizeString } from "@/lib/utils"
 
 export function PostCard({ slug, summary, title, category }: { title: string, summary: string, slug: string, category: string }) {
     return (
-        <Link href={`/blog/${category}/${slug}`} className="group ">
+        <Link title={title} href={`/blog/${category}/${slug}`} className="group ">
             <Card className=" h-52 group-hover:scale-105 transition-all" >
                 <CardHeader className="h-full">
                     <CardTitle>{minimizeString(title, 40)}</CardTitle>

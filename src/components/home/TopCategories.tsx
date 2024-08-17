@@ -12,7 +12,7 @@ const TopCategories = () => {
                 {
                     CATEGORIES.slice(0, 6).map((category) => (
                         <Button key={category.title} asChild variant={"outline"} className='text-sm hover:scale-110 transition-all hover:bg-transparent'>
-                            <Link href={`${category.href}`} className='text-xs '>
+                            <Link title={category.title} href={`${category.href}`} className='text-xs '>
                                 {category.title}
                             </Link>
                         </Button>

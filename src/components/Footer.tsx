@@ -10,7 +10,7 @@ const Footer = () => {
             <Container>
                 <footer className='grid grid-cols-1 gap-y-10 sm:grid-cols-3 gap-x-5'>
                     <div className='flex justify-between flex-col gap-y-4 '>
-                        <Link href={'/'} className='  relative w-32 h-16 group'>
+                        <Link title={siteConfig.name} href={'/'} className='  relative w-32 h-16 group'>
                             <Icon.logo className='size-10  transition-all  absolute group-hover:translate-x-[200%] ' />
                             <span className='font-bold capitalize absolute bottom-0'>{siteConfig.name}</span>
                         </Link>
@@ -25,7 +25,7 @@ const Footer = () => {
                         <div className='flex flex-col text-sm text-muted-foreground gap-y-2'>
                             {
                                 CATEGORIES.map((category) => (
-                                    <Link key={category.href} href={category.href} className='hover:underline w-fit'>
+                                    <Link title={category.title} key={category.href} href={category.href} className='hover:underline w-fit'>
                                         {category.title}
                                     </Link>
                                 ))
@@ -38,13 +38,13 @@ const Footer = () => {
                         </h5>
                         <div className='flex flex-col text-sm text-muted-foreground gap-y-2'>
 
-                            <Link href={'/about'} className='hover:underline w-fit'>
+                            <Link href={'/about'} title='About' className='hover:underline w-fit'>
                                 About
                             </Link>
-                            <Link href={'/mailto:samadmalik04@gmail.com'} rel='external' className='hover:underline w-fit'>
+                            <Link href={'mailto:samadmalik04@gmail.com'} title={"Connect to me using Gmail"} rel='external' className='hover:underline w-fit'>
                                 Contact
                             </Link>
-                            <Link href={'/terms-and-conditions'} rel='external' className='hover:underline w-fit'>
+                            <Link href={'/terms-and-conditions'} title='TnC' rel='external' className='hover:underline w-fit'>
                                 Terms and Conditions
                             </Link>
 

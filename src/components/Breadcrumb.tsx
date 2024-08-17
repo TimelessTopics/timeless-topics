@@ -15,13 +15,13 @@ export function Breadcrumb({ category, title }: { category: string, title: strin
         <BreadCrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                    <BreadcrumbLink href="/" title={"Home"}>Home</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                     <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                    <BreadcrumbLink className="capitalize" href={`/blog/${slugify(category)}`}>{category}</BreadcrumbLink>
+                    <BreadcrumbLink title={category} className="capitalize" href={`/blog/${slugify(category)}`}>{category}</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                     <Slash />
