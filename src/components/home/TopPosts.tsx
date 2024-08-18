@@ -36,7 +36,7 @@ const TopPosts = () => {
                             <div>
                                 <Icon.arrowRight className='size-5  group-hover:translate-x-2 transition-all' />
                             </div>
-                            <span className='break-words'>{post.title}</span>
+                            <h3 className='break-words'>{post.title}</h3>
                         </Link>
                     ))
                 }

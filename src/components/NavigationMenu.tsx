@@ -26,7 +26,7 @@ export function CustomNavigationMenu() {
                 <Icon.logo className="size-6 group-hover:animate-spin
                 group-focus:animate-spin
                 transition-all" />
-                <span className="font-mono">{siteConfig.name}</span>
+                <h1 className="font-mono">{siteConfig.name}</h1>
             </Link>
             <div className="flex-1 flex items-center">
 
@@ -61,8 +61,8 @@ export function CustomNavigationMenu() {
                 </NavigationMenu>
                 <div className="flex sm:w-20 items-center justify-between">
                     <ModeToggle />
-                    <Link href={"/rss"}>
-                        <Icon.rss className="size-6" />
+                    <Link prefetch={false} href={"/rss"}>
+                        <Icon.rss className="size-6" name="Rss" />
                     </Link>
                 </div>
             </div>

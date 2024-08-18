@@ -44,19 +44,19 @@ const Footer = () => {
                             <Link href={'mailto:samadmalik04@gmail.com'} title={"Connect to me using Gmail"} rel='external' className='hover:underline w-fit'>
                                 Contact
                             </Link>
-                            <Link href={'/terms-and-conditions'} title='TnC' rel='external' className='hover:underline w-fit'>
+                            <Link href={'/terms-and-conditions'} title='TnC' className='hover:underline w-fit'>
                                 Terms and Conditions
                             </Link>
 
                         </div>
                         <div className='flex items-center justify-start gap-3'>
-                            <Link href={siteConfig.links.instagram} >
+                            <Link rel='external' href={siteConfig.links.instagram} title='Instagram'>
                                 <Icon.instagram className='size-5' />
                             </Link>
-                            <Link href={siteConfig.links.github}>
+                            <Link rel='external' href={siteConfig.links.github} title='Github'>
                                 <Icon.github className='size-5' />
                             </Link>
-                            <Link href={siteConfig.links.linkedin} title='LinkedIn'>
+                            <Link rel='external' href={siteConfig.links.linkedin} title='LinkedIn'>
                                 <Icon.linkedin className='size-5' />
                             </Link>
                         </div>
