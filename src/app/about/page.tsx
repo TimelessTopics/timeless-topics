@@ -11,8 +11,8 @@ import { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-    title: "About Us",
-    description: `This is the About Page of the site ${siteConfig.name}, You will get to know about our vision here.`
+    title: `About Us of the `,
+    description: `This is the About Page of the site ${siteConfig.name}, Let's understand us better`
 }
 
 
@@ -48,13 +48,12 @@ const page = () => {
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
                     <CustomNavigationMenu />
-                    <h1 className='font-bold text-xl capitalize mb-2'>About Us</h1>
+                    <h2 className='font-bold text-xl capitalize mb-2'>About Us</h2>
                     <BackButton />
                 </Container>
             </div>
             <Container>
                 <div className='prose'>
-
                     <CustomMDX source={content} />
                 </div>
             </Container>

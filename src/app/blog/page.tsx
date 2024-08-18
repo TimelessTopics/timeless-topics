@@ -12,9 +12,9 @@ import { baseUrl } from '@/lib/constants'
 
 
 
-const metadata: Metadata = {
-    title: "All Blogs",
-    description: "All the blogs posts are here you can choose as your desire"
+export const metadata: Metadata = {
+    title: "All of the blog post ",
+    description: "All the blogs posts are here you can choose as your desire "
 }
 
 
@@ -48,7 +48,7 @@ const page = () => {
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
                     <CustomNavigationMenu />
-                    <h1 className='font-bold text-xl capitalize mb-2'>{"All Blogs"} posts</h1>
+                    <h2 className='font-bold text-xl capitalize mb-2'>{"All Blogs"} posts</h2>
                     <BackButton />
                 </Container>
             </div>

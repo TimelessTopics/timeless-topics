@@ -68,7 +68,8 @@ export const baseUrl = process.env.NODE_ENV === "development" ? "http://localhos
 
 export const siteConfig = {
     name: "Timeless Topics",
-    description: "Explore a diverse range of insightful and evergreen content on Timeless Topics. From in-depth articles and expert analysis to thought-provoking discussions, our blog provides valuable information on a variety of subjects that remain relevant over time. Stay informed and engaged with high-quality posts that cover everything from technology and culture to personal development and beyond.",
+    description: "Discover insightful, evergreen content on Timeless Topics. Dive into in-depth articles and expert analysis on technology, culture, and more.",
+    title: "Timeless Topics: Explore Diverse Insights and In-Depth Articles",
     url: baseUrl,
     ogImage: `${baseUrl}/og`,
     links: {

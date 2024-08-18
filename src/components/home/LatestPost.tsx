@@ -28,7 +28,7 @@ const LatestPost = () => {
                 }
             </div>
             <div className='pb-10'>
-                <Link title={"Show All Posts"} href={'/blog'} className='hover:underline underline underline-offset-4 transition-all hover:text-blue-400'>
+                <Link title={"Show All Posts"} prefetch href={'/blog'} className='hover:underline underline underline-offset-4 transition-all hover:text-blue-400'>
                     Show All Posts
                 </Link>
             </div>

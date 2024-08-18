@@ -19,6 +19,7 @@ function CreateHeading(level: number) {
             [
                 React.createElement("a", {
                     href: "#" + slug,
+                    title: children,
                     key: `link-${slug}`,
                     className: "anchor"
                 }, "#"),
@@ -33,7 +34,7 @@ function CreateHeading(level: number) {
 function CustomLink(props: any) {
     let href = props.href;
     return (
-        <Link href={href} {...props}>
+        <Link href={href} title={href} {...props}>
             {props.children}
         </Link>
     )

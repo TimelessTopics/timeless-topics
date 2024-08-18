@@ -11,7 +11,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: "Terms and Conditions",
-    description: `This is the Terms and Conditions page of the site ${siteConfig.name}, You will get to know about our privacy policies and conditions here.`
+    description: `Terms and Conditions page of the site ${siteConfig.name}, Know about our policies`,
 }
 
 
@@ -46,13 +46,12 @@ const page = () => {
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
                     <CustomNavigationMenu />
-                    <h1 className='font-bold text-xl capitalize mb-2'>Terms And Conditions</h1>
+                    <h2 className='font-bold text-xl capitalize mb-2'>Terms And Conditions</h2>
                     <BackButton />
                 </Container>
             </div>
             <Container>
                 <div className='prose'>
-
                     <CustomMDX source={content} />
                 </div>
             </Container>

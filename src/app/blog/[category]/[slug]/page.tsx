@@ -92,7 +92,7 @@ const page = ({ params }: { params: { slug: string } }) => {
                     <CustomNavigationMenu />
                     <div className='space-y-6'>
                         <Breadcrumb category={post.metadata.category} title={post.metadata.title} />
-                        <h1 className='font-bold text-xl capitalize'>{post.metadata.title}</h1>
+                        <h2 className='font-bold text-xl capitalize'>{post.metadata.title}</h2>
                         <BackButton />
                         <p className='text-muted-foreground'>{post.metadata.publishedAt}</p>
                     </div>
@@ -102,16 +102,16 @@ const page = ({ params }: { params: { slug: string } }) => {
                 <article className='prose'>
                     <CustomMDX source={post.content} />
                 </article>
-                <div className='mt-10 grid grid-cols-2 gap-x-8'>
+                <div className='mt-10 grid-cols-1 grid md:grid-cols-2 gap-y-10 gap-x-8'>
                     {
                         allHeadings.length > 0 &&
                         <div className='space-y-4'>
-                            <h4 className='font-bold text-xl'>Table of Contents</h4>
+                            <h2 className='font-bold text-xl'>Table of Contents</h2>
                             <NestedAccordion tocData={allHeadings} />
                         </div>
                     }
                     <div>
-                        <h4 className='font-bold text-xl '>Related Posts</h4>
+                        <h2 className='font-bold text-xl '>Related Posts</h2>
                         <div className='flex flex-col gap-6 pt-4 items-center justify-center'>
                             {
                                 relatedPosts.map((p, index) => (

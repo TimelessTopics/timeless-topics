@@ -61,7 +61,7 @@ export function CustomNavigationMenu() {
                 </NavigationMenu>
                 <div className="flex sm:w-20 items-center justify-between">
                     <ModeToggle />
-                    <Link prefetch={false} href={"/rss"}>
+                    <Link prefetch={false} href={"/rss"} title="RSS Feed">
                         <Icon.rss className="size-6" name="Rss" />
                     </Link>
                 </div>

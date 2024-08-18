@@ -73,7 +73,7 @@ const page = ({ params }: { params: { category: string } }) => {
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
                     <CustomNavigationMenu />
-                    <h1 className='font-bold text-xl capitalize mb-2'>{filteredPosts?.[0]?.metadata?.category || category.title}</h1>
+                    <h2 className='font-bold text-xl capitalize mb-2'>{filteredPosts?.[0]?.metadata?.category || category.title}</h2>
                     <BackButton />
 
                 </Container>
