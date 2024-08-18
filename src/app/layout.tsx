@@ -39,6 +39,11 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteConfig.url,
+  },
+  verification: {
+    other: {
+      "google-adsense-account": "ca-pub-4301611357933777"
+    }
   }
 };
 
