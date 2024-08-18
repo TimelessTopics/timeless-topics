@@ -5,8 +5,6 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { siteConfig } from "@/lib/constants";
 import AdSense from "@/components/AdSense";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
-import TruendoConsent from "@/components/TruendoConsent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,11 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <TruendoConsent />
-      </head>
       <AdSense />
-      <GoogleAnalytics />
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
