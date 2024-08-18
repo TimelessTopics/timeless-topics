@@ -4,7 +4,7 @@ import "./globals.css";
 // import Providers from "@/components/Providers";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { baseUrl, siteConfig } from "@/lib/constants";
+import { siteConfig } from "@/lib/constants";
 import AdSense from "@/components/AdSense";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -69,7 +69,6 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <Footer />
-
       </body>
     </html>
   );
