@@ -9,7 +9,9 @@ import BackButton from '@/components/BackButton'
 import { baseUrl, siteConfig } from '@/lib/constants'
 import { BlogPosting, WithContext } from 'schema-dts'
 import { updateView } from '@/lib/actions'
-import { slugify } from '@/lib/utils'
+import { getAllHeadings, slugify } from '@/lib/utils'
+import NestedAccordion from '@/components/NestedAccordion'
+import { PostCard } from '@/components/PostCard'
 
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
@@ -18,7 +20,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
         return
     }
     let ogImage = `${siteConfig.url}/og?title=${encodeURIComponent(post?.metadata.title)}`
-    let keywords = post?.metadata.keywords.split(",") || []
+    let keywords = post.metadata.keywords ? post?.metadata?.keywords?.split(",") : []
     return {
         title: post?.metadata.title,
         keywords,
@@ -59,6 +61,8 @@ const page = ({ params }: { params: { slug: string } }) => {
     if (!post) {
         return <h1>Post Not Found</h1>
     }
+
+
     const jsonLd: WithContext<BlogPosting> = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
@@ -74,7 +78,8 @@ const page = ({ params }: { params: { slug: string } }) => {
         url: `${baseUrl}/blog/${slugify(post.metadata.category)}/${post.slug}`
     }
 
-    // await updateView(post.slug, post.metadata.category, post.metadata.title)
+    const allHeadings = getAllHeadings(post.content)
+    const relatedPosts = getBlogPosts().filter((p) => (p.metadata.category === post.metadata.category) && p.slug !== post.slug).slice(0, 6)
     return (
         <div className='pb-10'>
             <script
@@ -93,13 +98,33 @@ const page = ({ params }: { params: { slug: string } }) => {
                     </div>
                 </Container>
             </div>
-            <Container>
+            <Container className=''>
                 <article className='prose'>
                     <CustomMDX source={post.content} />
                 </article>
+                <div className='mt-10 grid grid-cols-2 gap-x-8'>
+                    {
+                        allHeadings.length > 0 &&
+                        <div className='space-y-4'>
+                            <h4 className='font-bold text-xl'>Table of Contents</h4>
+                            <NestedAccordion tocData={allHeadings} />
+                        </div>
+                    }
+                    <div>
+                        <h4 className='font-bold text-xl '>Related Posts</h4>
+                        <div className='flex flex-col gap-6 pt-4 items-center justify-center'>
+                            {
+                                relatedPosts.map((p, index) => (
+                                    <PostCard key={index + p.slug} category={p.metadata.category} slug={p.slug} summary={p.metadata.summary} title={p.metadata.title} />
+                                ))
+                            }
+                        </div>
+                    </div>
+                </div>
             </Container>
         </div>
     )
 }
+
 
 export default page
