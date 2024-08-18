@@ -5,6 +5,9 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { siteConfig } from "@/lib/constants";
 import AdSense from "@/components/AdSense";
+import { GoogleAnalytics } from "@next/third-parties/google"
+
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -69,6 +72,7 @@ export default function RootLayout({
         </ThemeProvider>
         <Footer />
       </body>
+      <GoogleAnalytics gaId="G-8FM0M2FB9E" />
     </html>
   );
 }
