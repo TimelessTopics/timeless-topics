@@ -48,7 +48,8 @@ export const metadata: Metadata = {
       "google-adsense-account": "ca-pub-4301611357933777",
       "yandex-verification": "f1ffa5cdd192c229",
     }
-  }
+  },
+  applicationName: siteConfig.name,
 };
 
 
