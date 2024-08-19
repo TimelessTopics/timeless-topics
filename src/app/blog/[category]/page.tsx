@@ -1,6 +1,5 @@
 import React from 'react'
-import { getBlogPosts } from '../utils'
-import { slugify } from '@/lib/utils'
+import { getMDXData, slugify } from '@/lib/utils'
 import { CustomNavigationMenu } from '@/components/NavigationMenu'
 import Container from '@/components/Container'
 import { notFound } from 'next/navigation'
@@ -8,6 +7,7 @@ import { PostCard } from '@/components/PostCard'
 import { baseUrl, CATEGORIES, siteConfig } from '@/lib/constants'
 import BackButton from '@/components/BackButton'
 import { WithContext, Blog } from 'schema-dts'
+import { getPostsByCategory } from '@/lib/actions'
 
 
 
@@ -41,7 +41,7 @@ export async function generateStaticParams() {
     }))
 }
 
-const page = ({ params }: { params: { category: string } }) => {
+const page = async ({ params }: { params: { category: string } }) => {
     const jsonLd: WithContext<Blog> = {
         '@context': 'https://schema.org',
         '@type': 'Blog',
@@ -54,16 +54,13 @@ const page = ({ params }: { params: { category: string } }) => {
         },
         image: `${baseUrl}/og?title=${params.category}`
     }
-    const filteredPosts = getBlogPosts()
-        .filter((post) => slugify(post.metadata.category) === slugify(params.category))
-    // if (filteredPosts.length < 1) {
-    //     return notFound()
-    // }
 
-    const category = CATEGORIES.find((c) => slugify(c.title) === params.category)
-    if (!category) {
+
+    const data = await getPostsByCategory(slugify(params.category))
+    if (!data) {
         return notFound()
     }
+    const posts = getMDXData(data)
     return (
         <div className='min-h-screen pb-10'>
             <script
@@ -73,21 +70,21 @@ const page = ({ params }: { params: { category: string } }) => {
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
                     <CustomNavigationMenu />
-                    <h2 className='font-bold text-xl capitalize mb-2'>{filteredPosts?.[0]?.metadata?.category || category.title}</h2>
+                    <h2 className='font-bold text-xl capitalize mb-2'>{data[0]?.category}</h2>
                     <BackButton />
 
                 </Container>
             </div>
             <Container>
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
-                    {filteredPosts.map((post) => (
+                    {posts.map((post) => (
                         <article key={post.slug} className=''>
                             <PostCard category={post.metadata.category} slug={post.slug} summary={post.metadata.summary} title={post.metadata.title} />
                         </article>
                     ))
                     }
                     {
-                        filteredPosts.length === 0 && (
+                        posts.length === 0 && (
                             <div className='text-center'>No posts found for this category.</div>
                         )
                     }

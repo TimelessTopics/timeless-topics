@@ -31,7 +31,7 @@ const NavigationMenu = dynamic(() => import("@/components/ui/navigation-menu").t
 
 export function CustomNavigationMenu() {
     return (
-        <div className="flex  items-center gap-y-5  justify-between flex-wrap py-10">
+        <div className="flex  items-center gap-y-5  justify-between flex-wrap py-10 ">
             <Link href={'/'} title={siteConfig.name} className="group flex items-center justify-center gap-2">
                 <Icon.logo className="size-6 group-hover:animate-spin
                 group-focus:animate-spin

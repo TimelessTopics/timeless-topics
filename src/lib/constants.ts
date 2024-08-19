@@ -88,3 +88,6 @@ export const siteConfig = {
         "daily-mini-blogs"
     ]
 }
+
+
+export const MaxPostsPerPage = 4

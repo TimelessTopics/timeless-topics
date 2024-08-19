@@ -1,6 +1,6 @@
 import { siteConfig } from '@/lib/constants'
 import Link from 'next/link'
-import React from 'react'
+
 
 const HomeAbout = () => {
     return (

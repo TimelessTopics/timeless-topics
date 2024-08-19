@@ -1,13 +1,11 @@
 import Container from "@/components/Container";
 import LatestPost from "@/components/home/LatestPost";
-// import RightContent from "@/components/home/RightContent";
 import { CustomNavigationMenu } from "@/components/NavigationMenu";
 import { baseUrl, siteConfig } from "@/lib/constants";
 import { WebSite, WithContext } from "schema-dts"
-// import HomeAbout from "@/components/home/HomeAbout";
 import dynamic from "next/dynamic";
 const HomeAbout = dynamic(() => import("@/components/home/HomeAbout"))
-const RightContent = dynamic(() => import("@/components/home/RightContent"), { ssr: false }
+const RightContent = dynamic(() => import("@/components/home/RightContent")
 )
 
 export default function Home() {

@@ -1,5 +1,4 @@
 import React from 'react'
-import { getBlogPosts } from '../../utils'
 import { CustomMDX } from '@/components/MDX'
 import Container from '@/components/Container'
 import { CustomNavigationMenu } from '@/components/NavigationMenu'
@@ -8,30 +7,31 @@ import ReportView from '@/components/ReportView'
 import BackButton from '@/components/BackButton'
 import { baseUrl, siteConfig } from '@/lib/constants'
 import { BlogPosting, WithContext } from 'schema-dts'
-import { updateView } from '@/lib/actions'
-import { getAllHeadings, slugify } from '@/lib/utils'
+import { getAllPost, getAllPostsSlug, getPostsByCategory, getPostsBySlug, updateView } from '@/lib/actions'
+import { getAllHeadings, getMDXData, slugify } from '@/lib/utils'
 import NestedAccordion from '@/components/NestedAccordion'
 import { PostCard } from '@/components/PostCard'
+import { notFound } from 'next/navigation'
 
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-    const post = getBlogPosts().find((post) => post.slug === params.slug)
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+    const post = await getPostsBySlug(params.slug)
     if (!post) {
         return
     }
-    let ogImage = `${siteConfig.url}/og?title=${encodeURIComponent(post?.metadata.title)}`
-    let keywords = post.metadata.keywords ? post?.metadata?.keywords?.split(",") : []
+    let ogImage = `${siteConfig.url}/og?title=${encodeURIComponent(post?.title)}`
+    let keywords = post.keywords ? post.keywords?.split(",") : []
     return {
-        title: post?.metadata.title,
+        title: post?.title,
         keywords,
-        description: post?.metadata.summary,
-        canonical: `${siteConfig.url}/blog/${slugify(post?.metadata.category)}/${post?.slug}`,
+        description: post?.title,
+        canonical: `${siteConfig.url}/blog/${post?.categorySlug}/${post?.slug}`,
         openGraph: {
-            title: post.metadata.title,
-            description: post.metadata.summary,
+            title: post.title,
+            description: post.title,
             type: "article",
-            publishedTime: post.metadata.publishedAt,
-            url: `${siteConfig.url}/blog/${slugify(post.metadata.category)}/${post.slug}`,
+            publishedTime: post.createdAt.toISOString(),
+            url: `${siteConfig.url}/blog/${post.categorySlug}/${post.slug}`,
             images: [
                 {
                     url: ogImage
@@ -40,8 +40,8 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
         },
         twitter: {
             card: "summary_large_image",
-            title: post.metadata.title,
-            description: post.metadata.summary,
+            title: post.title,
+            description: post.title,
             images: [ogImage]
         }
     }
@@ -49,18 +49,26 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 
 
 export async function generateStaticParams() {
-    const posts = getBlogPosts()
+    const posts = await getAllPostsSlug() || []
+
     return posts.map((post) => ({
         slug: post.slug
     }))
 }
 
 
-const page = ({ params }: { params: { slug: string } }) => {
-    let post = getBlogPosts().find((post) => params.slug === post.slug)
-    if (!post) {
-        return <h1>Post Not Found</h1>
+const page = async ({ params }: { params: { slug: string } }) => {
+    // let post = getBlogPosts().find((post) => params.slug === post.slug)
+    // if (!post) {
+    //     return <h1>Post Not Found</h1>
+    // }
+
+    const data = await getPostsBySlug(slugify(params.slug))
+    if (!data) {
+        notFound()
     }
+
+    const post = getMDXData([data])[0]
 
 
     const jsonLd: WithContext<BlogPosting> = {
@@ -79,14 +87,15 @@ const page = ({ params }: { params: { slug: string } }) => {
     }
 
     const allHeadings = getAllHeadings(post.content)
-    const relatedPosts = getBlogPosts().filter((p) => (p.metadata.category === post.metadata.category) && p.slug !== post.slug).slice(0, 6)
+    const relatedPostsData = await getPostsByCategory(data.categorySlug, 2) || []
+    const relatedPosts = getMDXData(relatedPostsData.filter((relatedPost) => relatedPost.slug !== data.slug))
     return (
         <div className='pb-10'>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <ReportView category={post.metadata.category} slug={post.slug} title={post.metadata.title} />
+            <ReportView slug={post.slug} />
             <div className='bg-gray-100 dark:bg-gray-800 pb-8 mb-10'>
                 <Container>
                     <CustomNavigationMenu />

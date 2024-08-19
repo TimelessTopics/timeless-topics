@@ -1,6 +1,7 @@
-import React from 'react'
+import { Suspense } from 'react'
 import TopCategories from './TopCategories'
 import TopPosts from './TopPosts'
+import TopPostSkeleton from '../TopPostSkeleton'
 
 const RightContent = () => {
     return (

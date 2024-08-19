@@ -1,13 +1,13 @@
 import { baseUrl, CATEGORIES } from "@/lib/constants";
-import { getBlogPosts } from "./blog/utils";
 import { MetadataRoute } from "next";
-import { slugify } from "@/lib/utils";
+import { getAllPost } from "@/lib/actions";
 
 export default async function sitemap() {
     // Implement sitemap generation logic here
-    let blogs: MetadataRoute.Sitemap = getBlogPosts().map((blog) => ({
-        url: `${baseUrl}/blog/${slugify(blog.metadata.category)}/${blog.slug}`,
-        lastModified: blog.metadata.publishedAt,
+    const allBlogs = await getAllPost() || []
+    let blogs: MetadataRoute.Sitemap = allBlogs.map((blog) => ({
+        url: `${baseUrl}/blog/${blog.categorySlug}/${blog.slug}`,
+        lastModified: blog.updatedAt.toISOString(),
         priority: 0.8,
         changeFrequency: "monthly",
     }))
@@ -19,12 +19,6 @@ export default async function sitemap() {
         changeFrequency: "yearly",
     }))
 
-    // Add any other routes to sitemap here
-    //add home
-    //add about
-    //add contact
-    //add privacy policy
-    //add terms and conditions
     const others: MetadataRoute.Sitemap = [
         {
             url: baseUrl,

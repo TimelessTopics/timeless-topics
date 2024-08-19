@@ -1,24 +1,23 @@
 
+import { getAllPost } from "@/lib/actions";
 import { baseUrl, siteConfig } from "@/lib/constants";
-import { getBlogPosts } from "../blog/utils";
-import { slugify } from "@/lib/utils";
 
 export async function GET() {
-    let allBlogs = getBlogPosts();
+    let allBlogs = await getAllPost() || []
 
     const itemsXml = allBlogs
         .sort((a, b) => {
-            if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
+            if (new Date(a.createdAt) > new Date(b.createdAt)) {
                 return -1;
             }
             return 1;
         })
         .map(
             (post) => `<item>
-  <title>${post.metadata.title}</title>
-  <link>${baseUrl}/blog/${slugify(post.metadata.category)}/${post.slug}</link>
-  <description>${post.metadata.summary || ""}</description>
-  <pubDate>${new Date(post.metadata.publishedAt).toUTCString()}</pubDate>
+  <title>${post.title}</title>
+  <link>${baseUrl}/blog/${post.categorySlug}/${post.slug}</link>
+  <description>${post.title || ""}</description>
+  <pubDate>${new Date(post.createdAt).toUTCString()}</pubDate>
   </item>`
         )
         .join("/n");

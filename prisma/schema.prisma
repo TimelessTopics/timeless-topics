@@ -13,11 +13,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Blog {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  slug       String   @unique
-  title      String
-  category   String
-  view_count Int      @default(1)
-  updatedAt  DateTime @default(now())
+// model Blog {
+//   id         String   @id @default(auto()) @map("_id") @db.ObjectId
+//   slug       String   @unique
+//   title      String
+//   category   String
+//   content    String?
+//   view_count Int      @default(1)
+//   updatedAt  DateTime @default(now())
+// }
+
+model TestBlog {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug         String   @unique
+  title        String
+  keywords     String?
+  content      String
+  category     String
+  categorySlug String
+  view_count   Int      @default(0)
+  updatedAt    DateTime @updatedAt
+  createdAt    DateTime @default(now())
 }

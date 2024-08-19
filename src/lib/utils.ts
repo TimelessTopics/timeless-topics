@@ -1,4 +1,6 @@
+import { TestBlog } from "@prisma/client";
 import { type ClassValue, clsx } from "clsx"
+import matter from "gray-matter";
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
@@ -91,6 +93,46 @@ export const getAllHeadings = (mdxContent: string) => {
     }
   }
 
-
   return headings
+}
+
+
+export const getMDXData = (posts: TestBlog[]) => {
+  return posts.map((post) => {
+    const { content: rawContent, slug } = post
+    const grayContent = matter(rawContent)
+    const { data: metadata, content } = grayContent
+    return {
+      slug, metadata, content
+    }
+  })
+}
+
+export function formateDate(date: string, includeRelative = false) {
+  let currentDate = new Date();
+  if (!date.includes("T")) date = `${date}T00:00:00`
+
+  let targetDate = new Date(date);
+
+  let yearAgo = currentDate.getFullYear() - targetDate.getFullYear()
+  let monthAgo = currentDate.getMonth() - targetDate.getMonth()
+  let dayAgo = currentDate.getDate() - targetDate.getDate()
+
+  let formattedDate = ""
+
+  if (yearAgo > 0) formattedDate = (yearAgo > 1) ? `${yearAgo}years ago` : `${yearAgo}year ago`
+  else if (monthAgo > 0) formattedDate = (monthAgo > 1) ? `${monthAgo}months ago` : `${monthAgo}month ago`
+  else if (dayAgo > 0) formattedDate = (dayAgo > 1) ? `${dayAgo}days ago` : `${dayAgo}day ago`
+  else formattedDate = "Today"
+
+  let fullDate = targetDate.toLocaleString("en-us", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  })
+
+  if (includeRelative) {
+    return `${fullDate} (${formattedDate})`
+  }
+  return fullDate
 }

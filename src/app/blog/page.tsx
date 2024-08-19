@@ -2,11 +2,13 @@ import { CustomNavigationMenu } from '@/components/NavigationMenu'
 import Container from '@/components/Container'
 import { notFound } from 'next/navigation'
 import { PostCard } from '@/components/PostCard'
-import { getBlogPosts } from './utils'
 import BackButton from '@/components/BackButton'
 import { Metadata } from 'next'
 import { WebPage, WithContext } from 'schema-dts'
-import { baseUrl } from '@/lib/constants'
+import { baseUrl, MaxPostsPerPage } from '@/lib/constants'
+import { getAllPost, getTotalPostsCount } from '@/lib/actions'
+import { getMDXData } from '@/lib/utils'
+import Pagination from '@/components/Pagination'
 
 
 
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
 
 
 
-const page = () => {
+const page = async ({ searchParams }: { searchParams?: { page?: string } }) => {
 
     const jsonLd: WithContext<WebPage> = {
         '@context': 'https://schema.org',
@@ -32,11 +34,13 @@ const page = () => {
     }
 
 
+    const page = searchParams?.page ? Number(searchParams.page) : 1
+    const data = await getAllPost(page, MaxPostsPerPage)
+    if (!data) return notFound()
 
-    const allPosts = getBlogPosts()
-    if (allPosts.length < 1) {
-        return notFound()
-    }
+    const total = await getTotalPostsCount()
+    const allPosts = getMDXData(data)
+
     return (
         <div className='min-h-screen pb-10'>
             <script
@@ -59,6 +63,7 @@ const page = () => {
                     ))
                     }
                 </div>
+                <Pagination total={total || 0} current={page} />
             </Container>
         </div>
     )

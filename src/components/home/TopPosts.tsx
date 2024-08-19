@@ -1,27 +1,29 @@
-'use client'
+"use client"
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
 import { Icon } from '../Icon'
-import { ResponseData, slugify } from '@/lib/utils'
+import { slugify } from '@/lib/utils'
 import { getTopPosts } from '@/lib/actions'
+import { useEffect, useState } from 'react'
 import TopPostSkeleton from '../TopPostSkeleton'
-const TopPosts = () => {
-    const [data, setData] = useState<ResponseData | undefined>()
-    // const { data, error, isLoading } = useSWR(fetchUrl, fetcher, { refreshInterval: 100})
-    // if (error) return <div>Error :</div>
-    // if (isLoading) return <div>Loading...</div>
-    const [isLoading, setIsLoading] = useState(false)
 
+type DataT = {
+    title: string;
+    slug: string;
+    category: string;
+}[]
+const TopPosts = () => {
+    const [data, setData] = useState<DataT | undefined>()
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchTopPosts = async () => {
             setIsLoading(true)
-            const response = await getTopPosts()
-            // 
-            setData(response)
+            const topPosts = await getTopPosts()
+            setData(topPosts)
             setIsLoading(false)
         }
-        fetchData()
+        fetchTopPosts()
     }, [])
+
     if (isLoading) return <TopPostSkeleton />
     return (
         <div className='space-y-6 sm:sticky sm:top-10'>
