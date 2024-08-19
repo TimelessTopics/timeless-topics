@@ -1,5 +1,3 @@
-import React from 'react'
-import { slugify } from '@/lib/utils'
 import { CustomNavigationMenu } from '@/components/NavigationMenu'
 import Container from '@/components/Container'
 import { notFound } from 'next/navigation'
@@ -14,7 +12,7 @@ import { baseUrl } from '@/lib/constants'
 
 export const metadata: Metadata = {
     title: "All of the blog post ",
-    description: "All the blogs posts are here you can choose as your desire "
+    description: "All the blogs posts are here you can choose as your desire"
 }
 
 

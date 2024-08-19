@@ -1,7 +1,6 @@
 import React from 'react'
 import TopCategories from './TopCategories'
 import TopPosts from './TopPosts'
-import { Blog } from '@prisma/client'
 
 const RightContent = () => {
     return (

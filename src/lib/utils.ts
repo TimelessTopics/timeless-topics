@@ -91,6 +91,6 @@ export const getAllHeadings = (mdxContent: string) => {
     }
   }
 
-  console.log(headings[0].subHeadings);
+
   return headings
 }

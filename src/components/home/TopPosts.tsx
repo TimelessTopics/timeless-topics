@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { Icon } from '../Icon'
-import { fetchUrl, ResponseData, slugify } from '@/lib/utils'
+import { ResponseData, slugify } from '@/lib/utils'
 import { getTopPosts } from '@/lib/actions'
 import TopPostSkeleton from '../TopPostSkeleton'
 const TopPosts = () => {
@@ -16,7 +16,7 @@ const TopPosts = () => {
         const fetchData = async () => {
             setIsLoading(true)
             const response = await getTopPosts()
-            // console.log(response);
+            // 
             setData(response)
             setIsLoading(false)
         }

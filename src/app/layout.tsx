@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { siteConfig } from "@/lib/constants";
 import AdSense from "@/components/AdSense";
 import { GoogleAnalytics } from "@next/third-parties/google"
+import "./globals.css";
+
 
 
 

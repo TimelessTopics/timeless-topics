@@ -16,7 +16,7 @@ export async function updateView(slug: string, category: string, title: string) 
         }
         return view
     } catch (error) {
-        console.log("Database Error...", error);
+
     }
 }
 
@@ -32,6 +32,6 @@ export async function getTopPosts() {
         })
         return data
     } catch (error) {
-        console.log("Database Error...", error);
+
     }
 }

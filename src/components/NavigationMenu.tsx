@@ -5,8 +5,8 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import {
-    NavigationMenu,
-    NavigationMenuContent,
+    // NavigationMenu,
+    // NavigationMenuContent,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
@@ -15,7 +15,17 @@ import {
 } from "@/components/ui/navigation-menu"
 import { CATEGORIES, siteConfig } from "@/lib/constants"
 import { Icon } from "@/components/Icon"
-import { ModeToggle } from "./ModeToggle"
+import dynamic from "next/dynamic"
+import { Skeleton } from "./ui/skeleton"
+// import { ModeToggle } from "./ModeToggle"
+
+const ModeToggle = dynamic(() => import('./ModeToggle'), {
+    ssr: false,
+    loading: () => <Skeleton className="h-[1.2rem] w-[1.2rem]" />
+})
+
+const NavigationMenuContent = dynamic(() => import("@/components/ui/navigation-menu").then((data) => data.NavigationMenuContent))
+const NavigationMenu = dynamic(() => import("@/components/ui/navigation-menu").then((data) => data.NavigationMenu))
 
 
 
@@ -59,7 +69,7 @@ export function CustomNavigationMenu() {
                     </NavigationMenuList>
 
                 </NavigationMenu>
-                <div className="flex sm:w-20 items-center justify-between">
+                <div className="flex sm:w-20 items-center justify-between w-16">
                     <ModeToggle />
                     <Link prefetch={false} href={"/rss"} title="RSS Feed">
                         <Icon.rss className="size-6" name="Rss" />
@@ -99,3 +109,6 @@ const ListItem = React.forwardRef<
     )
 })
 ListItem.displayName = "ListItem"
+
+
+export default NavigationMenu

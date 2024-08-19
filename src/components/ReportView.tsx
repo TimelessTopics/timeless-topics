@@ -18,7 +18,7 @@ import { useEffect, useState } from "react"
 //                     body: JSON.stringify({ slug, category, title })
 //                 })
 //             } catch (error) {
-//                 console.log("Something went wrong", error)
+//                 
 //             }
 //         }
 //         postData()
@@ -40,7 +40,7 @@ export default function ReposrtView({ category, slug, title }: { slug: string, c
         const update = async () => {
             const updatedView = await updateView(slug, category, title)
             setView(updatedView || 0)
-            console.log("updated view", view);
+
         }
         update()
     }, [])
