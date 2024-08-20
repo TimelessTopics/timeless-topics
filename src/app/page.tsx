@@ -7,6 +7,9 @@ import dynamic from "next/dynamic";
 const HomeAbout = dynamic(() => import("@/components/home/HomeAbout"))
 const RightContent = dynamic(() => import("@/components/home/RightContent")
 )
+// const LatestPost = dynamic(() => import("@/components/home/LatestPost"))
+
+export const revalidate = 3500
 
 export default function Home() {
   const jsonLd: WithContext<WebSite> = {

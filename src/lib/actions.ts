@@ -1,7 +1,7 @@
 "use server"
 import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
-import { MaxPostsPerPage } from "./constants";
+import { baseUrl, MaxPostsPerPage } from "./constants";
 
 // export async function updateView(slug: string, category: string, title: string) {
 //     try {
@@ -132,7 +132,6 @@ export async function getTotalPostsCount() {
 }
 
 export async function getPostsByCategory(category: string, limit?: number, skip = 0) {
-    console.log(category);
 
     try {
         const data = await prisma.testBlog.findMany({
@@ -151,7 +150,6 @@ export async function getPostsByCategory(category: string, limit?: number, skip 
 }
 
 export async function getPostsBySlug(slug: string) {
-    console.log(slug);
 
     try {
         const data = await prisma.testBlog.findUnique({
