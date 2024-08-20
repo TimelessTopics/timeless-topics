@@ -83,7 +83,7 @@ export async function getTopPosts() {
 export async function getLatestBlogs() {
     try {
         const latestBlogs = prisma.testBlog.findMany({
-            take: 4,
+            take: 8,
             orderBy: {
                 createdAt: "desc"
             }
@@ -110,10 +110,11 @@ export async function getAllPost(page = 1, max?: number) {
     }
 }
 
-export async function getAllPostsSlug() {
+export async function getAllPostsSlugAndCategory() {
     try {
-        const slugs = await prisma.testBlog.findMany({ select: { slug: true } })
-        return slugs
+        const posts = await prisma.testBlog.findMany({ select: { slug: true, categorySlug: true } })
+
+        return posts
     } catch (error) {
         console.log("error", error);
 

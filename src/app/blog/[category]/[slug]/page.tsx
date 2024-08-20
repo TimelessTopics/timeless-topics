@@ -7,7 +7,7 @@ import ReportView from '@/components/ReportView'
 import BackButton from '@/components/BackButton'
 import { baseUrl, siteConfig } from '@/lib/constants'
 import { BlogPosting, WithContext } from 'schema-dts'
-import { getAllPost, getAllPostsSlug, getPostsByCategory, getPostsBySlug, updateView } from '@/lib/actions'
+import { getAllPostsSlugAndCategory, getPostsByCategory, getPostsBySlug, updateView } from '@/lib/actions'
 import { getAllHeadings, getMDXData, slugify } from '@/lib/utils'
 import NestedAccordion from '@/components/NestedAccordion'
 import { PostCard } from '@/components/PostCard'
@@ -49,19 +49,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 
 export async function generateStaticParams() {
-    const posts = await getAllPostsSlug() || []
+    const posts = await getAllPostsSlugAndCategory() || []
 
     return posts.map((post) => ({
+        category: post.categorySlug,
         slug: post.slug
     }))
 }
 
 
 const page = async ({ params }: { params: { slug: string } }) => {
-    // let post = getBlogPosts().find((post) => params.slug === post.slug)
-    // if (!post) {
-    //     return <h1>Post Not Found</h1>
-    // }
+
 
     const data = await getPostsBySlug(slugify(params.slug))
     if (!data) {
