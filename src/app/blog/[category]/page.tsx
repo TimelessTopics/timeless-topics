@@ -77,9 +77,9 @@ const page = async ({ params }: { params: { category: string } }) => {
             </div>
             <Container>
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
-                    {posts.map((post) => (
+                    {posts.map((post, indx) => (
                         <article key={post.slug} className=''>
-                            <PostCard category={post.metadata.category} slug={post.slug} summary={post.metadata.summary} title={post.metadata.title} />
+                            <PostCard category={data[indx].categorySlug} slug={post.slug} summary={post.metadata.summary} title={post.metadata.title} />
                         </article>
                     ))
                     }
